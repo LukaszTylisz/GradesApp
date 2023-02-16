@@ -1,0 +1,110 @@
+﻿using System;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
+
+namespace GradesApp
+{
+    public class InMemoryStudent : StudentBase
+    {
+        public List<double> grades;
+        public InMemoryStudent(string firstName, string lastName) : base(firstName, lastName)
+        {
+            grades = new List<double>();
+        }
+        public override void AddGrade(double grade)
+        {
+            if (grade > 0 && grade <= 6)
+            {
+                grades.Add(grade);
+                if (grade < 0)
+                {
+                    CheckIsGradeUnder3();
+                }
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid argument: {nameof(grade)}. Only grades from 1 to 6 are allowed!");
+            }
+        }
+
+        public override void AddGrade(string grade)
+        {
+            if (grade.Length == 2 && char.IsDigit(grade[0]) && grade[0] <= '6' && (grade[1] == '+' || grade[1] == '-'))
+            {
+                double convertedGradeToDouble = char.GetNumericValue(grade[0]);
+                switch (grade[1])
+                {
+                    case '+':
+                        double gradePlus = convertedGradeToDouble + 0.50;
+                        if (gradePlus > 1 && gradePlus <= 6)
+                        {
+                            this.grades.Add(gradePlus);
+                            if (gradePlus < 3)
+                            {
+                                CheckIsGradeUnder3();
+                            }
+                        }
+                        else
+                        {
+                            throw new ArgumentException($"Invalid argument: {nameof(grade)}. Only grades from 1 to 6 are allowed!");
+                        }
+                        break;
+
+                    case '-':
+                        double gradeMinus = convertedGradeToDouble - 0.25;
+                        if (gradeMinus > 1 && gradeMinus <= 6)
+                        {
+                            this.grades.Add(gradeMinus);
+                            if (gradeMinus < 3)
+                            {
+                                CheckIsGradeUnder3();
+                            }
+                        }
+                        else
+                        {
+                            throw new ArgumentException($"Invalid argument: {nameof(grade)}. Only grades from 1 to 6 are allowed! ");
+                        }
+                        break;
+
+                    default:
+                        throw new ArgumentException($"Invalid argument: {nameof(grade)}. Only grades from 1 to 6 are allowed!");
+                }
+            }
+            else
+            {
+                double gradeDouble = 0;
+                var isParsed = double.TryParse(grade, out gradeDouble);
+                if (isParsed && gradeDouble > 0 && gradeDouble <= 6)
+                {
+                    this.grades.Add(gradeDouble);
+
+                    if (gradeDouble < 3)
+                    {
+                        CheckIsGradeUnder3();
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid argument: {nameof(grade)}. Only grades from 1 to 6 are allowed!");
+                }
+            }
+        }
+        public override Statistics GetStatistics()
+        {
+            var result = new Statistics();
+
+            foreach (var grade in grades)
+            {
+                result.Add(grade);
+            }
+            return result;
+        }
+        public override void ShowGrades()
+        {
+            string showFullName = ($"{this.FirstName} {this.LastName} grades are:");
+            string join = string.Join("; ", grades);
+            Rating.ColorWriteLine(ConsoleColor.DarkYellow,($"\n{showFullName} {join}"));
+        }
+    }
+}

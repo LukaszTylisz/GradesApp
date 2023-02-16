@@ -1,2 +1,5 @@
-# GradesApp
-Students Grades Book console app. what saves students grades to the application memory or in a file.txt. It saves as many grades as user want to add and get student's statistics 
+﻿# Grades App
+
+It's a simple application where you add student and add his grades. Grades can be saved in memory or in a file. 
+Every time when each student creates a file with his grades, there will be created audit.txt file what works like a log file
+It saves who created a file, with his grades and when it was made.

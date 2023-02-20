@@ -1,15 +1,14 @@
 ﻿namespace GradesApp
 {
-    public abstract class Rating : StudentBase
+    public abstract class GradeEntry 
     {
-        protected Rating(string firstName, string lastName) : base(firstName, lastName)
+        protected GradeEntry()
         {
         }
-        public static void CombineToFile(string firstName, string lastName)
+        public static void Combine(string firstName, string lastName, IStudent savedStudent)
         {
             if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName))
             {
-                var savedStudent = new SavedStudent(firstName, lastName);
                 savedStudent.GradeUnder3 += OnGradeUnder3;
                 EnterGrade(savedStudent);
                 savedStudent.ShowStatistics();
@@ -19,20 +18,7 @@
                 ColorWriteLine(ConsoleColor.Red, "Fields can't be empty");
             }
         }
-        public static void CombineToMemory(string firstName, string lastName)
-        {
-            if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName))
-            {
-                var inMemoryStudent = new InMemoryStudent(firstName, lastName);
-                inMemoryStudent.GradeUnder3 += OnGradeUnder3;
-                EnterGrade(inMemoryStudent);
-                inMemoryStudent.ShowStatistics();
-            }
-            else
-            {
-                ColorWriteLine(ConsoleColor.Red, "Fields can't be empty");
-            }
-        }
+
         private static void EnterGrade(IStudent student)
         {
             while (true)
@@ -65,10 +51,12 @@
                 }
             }
         }
+
         static void OnGradeUnder3(object sender, EventArgs args)
         {
             ColorWriteLine(ConsoleColor.DarkGray, "Oh no! Student got grade under 3. We should inform student’s parents about this fact!");
         }
+
         public static void ColorWriteLine(ConsoleColor theColor, string theMessage)
         {
             Console.ForegroundColor = theColor;

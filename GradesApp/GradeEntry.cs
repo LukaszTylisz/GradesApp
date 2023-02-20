@@ -1,8 +1,8 @@
 ﻿namespace GradesApp
 {
-    public abstract class Rating 
+    public abstract class GradeEntry 
     {
-        protected Rating()
+        protected GradeEntry()
         {
         }
         public static void Combine(string firstName, string lastName, IStudent savedStudent)
@@ -56,6 +56,7 @@
         {
             ColorWriteLine(ConsoleColor.DarkGray, "Oh no! Student got grade under 3. We should inform student’s parents about this fact!");
         }
+
         public static void ColorWriteLine(ConsoleColor theColor, string theMessage)
         {
             Console.ForegroundColor = theColor;

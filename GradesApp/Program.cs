@@ -17,7 +17,7 @@
                 "X - Close app\n");
                 Rating.ColorWriteLine(ConsoleColor.Cyan, "Choose one the option");
                 var userInput = Console.ReadLine()
-                                       .ToUpper();
+                    .ToUpper();
                 switch (userInput)
                 {
                     case "1":
@@ -38,6 +38,7 @@
                 Console.ReadKey();
             }
         }
+
         private static void AddGradesToFile()
         {
             string firstName = GetValuefromUser("Please insert student's first name: ");
@@ -46,6 +47,7 @@
             var student = new SavedStudent(firstName, lastName);
             Rating.Combine(firstName, lastName, student);
         }
+
         private static void AddGradesToMemory()
         {
             string firstName = GetValuefromUser("Please insert student's first name: ");
@@ -54,6 +56,7 @@
             var student = new InMemoryStudent(firstName, lastName);
             Rating.Combine(firstName, lastName, student);
         }
+
         private static string GetValuefromUser(string rating)
         {
             Console.WriteLine($"{rating}");

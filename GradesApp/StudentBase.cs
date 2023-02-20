@@ -1,7 +1,7 @@
 ﻿namespace GradesApp
 {
     public delegate void GradeUnder3Delegate(object sender, EventArgs args);
-    public abstract class StudentBase: Person, IStudent
+    public abstract class StudentBase : Person, IStudent
     {
         public StudentBase(string firstName, string lastName) : base(firstName, lastName)
         {

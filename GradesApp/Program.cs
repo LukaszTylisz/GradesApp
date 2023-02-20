@@ -42,14 +42,17 @@
         {
             string firstName = GetValuefromUser("Please insert student's first name: ");
             string lastName = GetValuefromUser("Please insert student's last name: ");
-
-            Rating.CombineToFile(firstName, lastName);
+            
+            var student = new SavedStudent(firstName, lastName);
+            Rating.Combine(firstName, lastName, student);
         }
         private static void AddGradesToMemory()
         {
             string firstName = GetValuefromUser("Please insert student's first name: ");
             string lastName = GetValuefromUser("Please insert student's last name: ");
-            Rating.CombineToMemory(firstName, lastName);
+
+            var student = new InMemoryStudent(firstName, lastName);
+            Rating.Combine(firstName, lastName, student);
         }
         private static string GetValuefromUser(string rating)
         {

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GradesApp
 {
-    public class SavedStudent : AddingGrades
+    public class SavedStudent : StudentBase
     {
         private const string fileName = "_grades.txt";
         private string fullFileName;

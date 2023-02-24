@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GradesApp
 {
-    public class InMemoryStudent : AddingGrades
+    public class InMemoryStudent : StudentBase
     {
         public List<double> grades;
         public InMemoryStudent(string firstName, string lastName) : base(firstName, lastName)

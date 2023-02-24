@@ -12,6 +12,7 @@
         public abstract void ShowGrades();
         public abstract Statistics GetStatistics();
         public abstract void AddGrade(double grade);
+        
         public  void AddGrade(string grade)
         {
             double convertedGradeToDouble = char.GetNumericValue(grade[0]);
@@ -76,6 +77,7 @@
                 Console.WriteLine($"Couldn't get statistics for {this.FirstName} {this.LastName} because no grade has been added.");
             }
         }
+        
         protected void CheckIsGradeUnder3()
         {
             if (GradeUnder3 != null)
